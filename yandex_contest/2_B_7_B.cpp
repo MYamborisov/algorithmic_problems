@@ -8,23 +8,21 @@ int main() {
     cin >> n;
     vector<pair<int, int>> v;
     for (size_t i = 0; i < n; ++i) {
-        int L, R;
-        cin >> L >> R;
-        v.emplace_back(L, 0);
-        v.emplace_back(R, 1);
+        int T, L;
+        cin >> T >> L;
+        v.emplace_back(T, 1);
+        v.emplace_back(T + L, 0);
     }
     std::sort(v.begin(), v.end());
-    int current = 0, length = 0;
+    int current = 0, maximum = 0;
     for (size_t i = 0; i < v.size(); ++i) {
-        if (current != 0) {
-            length += v[i].first - v[i - 1].first;
-        }
-        if (v[i].second == 0) {
+        if (v[i].second == 1) {
             ++current;
         } else {
             --current;
         }
+        maximum = max(maximum, current);
     }
-    cout << length;
+    cout << maximum;
 }
 
